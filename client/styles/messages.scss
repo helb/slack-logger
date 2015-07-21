@@ -1,0 +1,145 @@
+@import "colors";
+@import "sizes";
+
+.avatar {
+    float: left;
+    width: $avatar-size;
+    height: $avatar-size;
+    border-radius: 0.25rem;
+    opacity: 0.9;
+    transition: opacity 0.33s;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+}
+
+.info-text {
+    font-weight: 300;
+    text-align: center;
+    margin-top: calc(50vh - 2.5em);
+
+    a {
+        color: $link-hover-color;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+
+    .message-header {
+
+        .author,
+        .timestamp {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .author {
+            font-weight: bold;
+        }
+
+        .timestamp {
+            font-size: 0.85em;
+            font-weight: 300;
+            
+            a {
+                color: $timestamp-color;
+            }
+        }
+     
+        a {
+            color: $base-color;
+            text-decoration: none;
+
+            &.message-channel-link {
+                font-size: 0.85em;
+                font-weight: 300;
+                color: $timestamp-color;
+            }
+
+            &:hover,
+            &:focus {
+                color: $link-hover-color;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .message-content {
+        line-height: 1.75em;
+
+        .emoji {
+            display: inline-block;
+            height: $emoji-size;
+            width: $emoji-size;
+            vertical-align: middle;
+        }
+
+        code,
+        pre {
+            padding: 0.25em;
+            background-color: $code-bg;
+            border: 1px solid darken($code-bg, 5%);
+            color: $code-color;
+            font-family: monospace;
+        }
+
+        blockquote {
+            padding: 0.25em;
+            background-color: $quote-bg;
+            border: 1px solid darken($quote-bg, 5%);
+            color: $quote-color;
+            font-style: italic;
+        }
+
+        .indent {
+            padding-left: 2em;
+            line-height: 2em;
+        }
+
+        a,
+        a:link {
+            color: $link-color;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: $link-hover-color;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: mix($link-color, $base-bg, 60%);
+        }
+    }
+
+    &.detail {
+        flex-direction: column;
+
+        .message-header {
+            line-height: 1.2em;
+            border-right: 0;
+            text-align: left;
+            width: 100%;
+            border-bottom: 1px solid $avatar-border;
+
+            .message-header-text {
+                margin-left: $avatar-size + 1rem;
+            }
+        }
+
+        .message-content {
+            padding: 1em 0;
+        }
+    }
+}

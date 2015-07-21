@@ -1,0 +1,27 @@
+<template name="messages">
+	{{#each messages}}
+		<div class="message-container">
+			<a href="/u/{{author}}"><img class="avatar" title="{{authorRef.userName}}" src="{{authorRef.avatarUrl}}" /></a>
+			<div class="message">
+				<header class="message-header">
+					<div class="author"><a href="/u/{{author}}">
+					{{#if authorRef.realName}}
+						{{authorRef.realName}}
+					{{else}}
+						{{authorRef.userName}}
+					{{/if}}
+					</a>
+					{{#if $neq routeName "channel"}}<a class="message-channel-link" href="/c/{{channel}}">#{{channelRef.name}}</a>{{/if}}
+					</div>
+					<div class="timestamp"><a href="/m/{{_id}}">{{formatDate created}}</a></div>
+				</header>
+				<div class="message-content">
+					{{{formatMessage content}}}
+				</div>
+			</div>
+		</div>
+	{{else}}
+	<p class="empty-messages info-text">There are no saved messages matching your selection.<br>
+	To start logging a channel, simply invite the bot into it.</p>
+	{{/each}}
+</template>

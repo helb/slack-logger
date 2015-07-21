@@ -1,0 +1,31 @@
+@import "colors";
+
+.channels {
+    overflow-y: auto;
+
+    a {
+        border-top: 1px solid $sidebar-darker-bg;
+        color: $sidebar-accent-color;
+        display: block;
+        padding: 0.25rem 1rem;
+        text-decoration: none;
+        transition: all 0.15s;
+        outline: none;
+
+        &:last-child {
+            border-bottom: 1px solid $sidebar-darker-bg;
+        }
+
+        &.active,
+        &:hover {
+            background: $sidebar-darker-bg;
+            color: $sidebar-color;
+        }
+
+        .hash {
+            color: mix($sidebar-accent-color, $sidebar-bg, 40%);
+            margin-right: 0.2em;
+            font-weight: bold;
+        }
+    }
+}

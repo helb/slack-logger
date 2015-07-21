@@ -1,0 +1,7 @@
+<template name="channels">
+	<nav class="channels">
+		{{#each channels}}
+			<a class="channel-link" href="/c/{{_id}}"><span class="hash">#</span>{{name}}</a>
+		{{/each}}
+	</nav>
+</template>

@@ -5,8 +5,11 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
-insecure
 iron:router
 hiukim:slack-client
 fourseven:scss
+aldeed:collection2
+momentjs:moment
+http
+dburles:collection-helpers
+raix:handlebar-helpers

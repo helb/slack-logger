@@ -1,0 +1,26 @@
+<template name="filter">
+	<form class="filter">
+		{{#if $eq routeName "channel"}}
+			<p><input type="radio" name="search-scope" id="radio-all" class="radio" />
+			<label for="radio-all">All messages</label></p>
+			<p><input type="radio" name="search-scope" id="radio-channel" class="radio" checked="checked" />
+			<label for="radio-channel">Current channel</label></p>
+		{{/if}}
+
+		{{#if $eq routeName "user"}}
+			<p><input type="radio" name="search-scope" id="radio-all" class="radio" />
+			<label for="radio-all">All messages</label></p>
+			<p><input type="radio" name="search-scope" id="radio-user" class="radio" checked="checked" />
+			<label for="radio-user">Current user</label></p>
+		{{/if}}
+
+		<p><input type="search" class="search" id="search" /></p>
+
+		<p><input type="radio" name="search-type" id="radio-fulltext" class="radio" checked="checked" />
+		<label for="radio-fulltext">Fulltext</label></p>
+		<p title="JS compatible"><input type="radio" name="search-type" id="radio-regex" class="radio" />
+		<label for="radio-regex">Regex</label></p>
+
+		<p class="submit-button"><button id="run-search">Filter &rarr;</button></p>
+	</form>
+</template>
