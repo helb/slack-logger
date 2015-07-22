@@ -1,5 +1,5 @@
 Template.channels.helpers({
-	channels: function(){
-		return Channels.find({}, {sort: {name: 1}});
-	}
+    channels: function(){
+        return Channels.find({}, {sort: {name: 1}});
+    }
 });

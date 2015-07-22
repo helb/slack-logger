@@ -1,5 +1,5 @@
 Template.messages.helpers({
-	formatMessage: function(text){
-		return slackFormat(text);
-	}
+    formatMessage: function(text){
+        return slackFormat(text);
+    }
 });

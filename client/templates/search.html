@@ -1,7 +1,4 @@
-<template name="messages">
-    {{#if messages.count}}
-        <a class="load-older">&#8593; Load older messages &#8593;</a>
-    {{/if}}
+<template name="search">
     {{#each messages}}
         <div class="message-container">
             <a href="/u/{{author}}"><img class="avatar" title="{{authorRef.userName}}" src="{{authorRef.avatarUrl}}" /></a>
@@ -15,9 +12,7 @@
                                 {{authorRef.userName}}
                             {{/if}}
                         </a>
-                        {{#if $neq routeName "channel"}}
-                            <a class="message-channel-link" href="/c/{{channel}}">#{{channelRef.name}}</a>
-                        {{/if}}
+                        <a class="message-channel-link" href="/c/{{channel}}">#{{channelRef.name}}</a>
                     </div>
                     <div class="timestamp">
                         <a href="/m/{{_id}}">{{formatDate created}}</a>
@@ -29,9 +24,8 @@
             </div>
         </div>
     {{else}}
-        <p class="empty-messages info-text">
-            There are no saved messages matching your selection.<br>
-            To start logging a channel, simply invite the bot into it.
+        <p class="empty-search info-text">
+            There are no messages matching your search query.
         </p>
     {{/each}}
 </template>

@@ -1,56 +1,56 @@
 @import "colors";
 
 .filter {
-	display: block;
-	width: 100%;
-	padding: 0.5rem 1rem;
+    display: block;
+    padding: 0.5rem 1rem;
+    width: 100%;
 
-	.search {
-		width: 100%;
-		padding: 0.5rem;
-		margin: 0.5rem 0;
-		font-family: monospace;
-					background-color: $sidebar-bg;
-			color: $sidebar-accent-color;
-			border: 1px solid $sidebar-accent-color;
-			transition: all 0.33s;
+    .search {
+        background-color: $sidebar-bg;
+        border: 1px solid $sidebar-accent-color;
+        color: $sidebar-accent-color;
+        font-family: monospace;
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        transition: all 0.33s;
+        width: 100%;
 
-			&:focus {
-				background-color: $sidebar-darker-bg;
-			}
-	}
+        &:focus {
+            background-color: $sidebar-darker-bg;
+        }
+    }
 
-	label {
-		color: $sidebar-accent-color;
-		cursor: pointer;
-		transition: all 0.15s;
+    label {
+        color: $sidebar-accent-color;
+        cursor: pointer;
+        transition: all 0.15s;
 
-		&:hover {
-			color: lighten($sidebar-accent-color, 10%);
-		}
-	}
+        &:hover {
+            color: lighten($sidebar-accent-color, 10%);
+        }
+    }
 
-	.submit-button {
-		text-align: right;
+    .submit-button {
+        text-align: right;
 
-		button {
-			transition: all 0.33s;
-			position: relative;
-			top: -2.5rem;
-			padding: 0.5rem 0.75rem;
-			cursor: pointer;
-			background-color: $sidebar-bg;
-			color: $sidebar-accent-color;
-			border: 1px solid $sidebar-accent-color;
-			text-transform: uppercase;
-			letter-spacing: 0.1em;
-			width: 7rem;
+        button {
+            background-color: $sidebar-bg;
+            border: 1px solid $sidebar-accent-color;
+            color: $sidebar-accent-color;
+            cursor: pointer;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 0.75rem;
+            position: relative;
+            text-transform: uppercase;
+            top: -2.5rem;
+            transition: all 0.33s;
+            width: 7rem;
 
-			&:hover,
-			&:active {
-				background-color: $sidebar-darker-bg;
-				letter-spacing: 0.25em;
-			}
-		}
-	}
+            &:hover,
+            &:active {
+                background-color: $sidebar-darker-bg;
+                letter-spacing: 0.25em;
+            }
+        }
+    }
 }

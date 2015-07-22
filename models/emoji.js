@@ -7,4 +7,4 @@ Schemas.Emoji = new SimpleSchema({
     }
 });
 
-Emojis.attachSchema(Schemas.Emoji)
+Emojis.attachSchema(Schemas.Emoji);

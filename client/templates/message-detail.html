@@ -1,22 +1,25 @@
 <template name="messageDetail">
-		<div class="message-container">
-			<a href="/u/{{author}}"><img class="avatar" title="{{authorRef.userName}}" src="{{authorRef.avatarUrl}}" /></a>
-			<div class="message detail">
-				<header class="message-header">
-					<div class="author"><a href="/u/{{author}}">
-					{{#if authorRef.realName}}
-						{{authorRef.realName}}
-					{{else}}
-						{{authorRef.userName}}
-					{{/if}}
-					</a>
-					{{#if $neq routeName "channel"}}<a class="message-channel-link" href="/c/{{channel}}">#{{channelRef.name}}</a>{{/if}}
-					</div>
-					<div class="timestamp">{{formatDate created}}</div>
-				</header>
-				<div class="message-content">
-					{{{formatMessage content}}}
-				</div>
-			</div>
-		</div>
+    <div class="message-container">
+        <a href="/u/{{author}}"><img class="avatar" title="{{authorRef.userName}}" src="{{authorRef.avatarUrl}}" /></a>
+        <div class="message detail">
+            <header class="message-header">
+                <div class="author">
+                    <a href="/u/{{author}}">
+                    {{#if authorRef.realName}}
+                        {{authorRef.realName}}
+                    {{else}}
+                        {{authorRef.userName}}
+                    {{/if}}
+                    </a>
+                    {{#if $neq routeName "channel"}}
+                        <a class="message-channel-link" href="/c/{{channel}}">#{{channelRef.name}}</a>
+                    {{/if}}
+                </div>
+                <div class="timestamp">{{formatDate created}}</div>
+            </header>
+            <div class="message-content">
+                {{{formatMessage content}}}
+            </div>
+        </div>
+    </div>
 </template>

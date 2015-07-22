@@ -4,15 +4,15 @@
 }
 
 .sidebar {
-    width: 20rem;
     display: flex;
     flex-direction: column;
+    width: 20rem;
 }
 
 .messages {
-	overflow-y: auto;
-    flex: 1;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
+    flex: 1;
     padding: 0.5rem 1rem;
 }

@@ -19,13 +19,13 @@ Schemas.Message = new SimpleSchema({
     }
 });
 
-Messages.attachSchema(Schemas.Message)
+Messages.attachSchema(Schemas.Message);
 
 Messages.helpers({
-    authorRef: function() {
+    authorRef: function() {
         return Users.findOne(this.author);
     },
-    channelRef: function() {
+    channelRef: function() {
         return Channels.findOne(this.channel);
-    },
+    }
 });

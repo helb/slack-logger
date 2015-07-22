@@ -16,4 +16,4 @@ Schemas.User = new SimpleSchema({
     }
 });
 
-Users.attachSchema(Schemas.User)
+Users.attachSchema(Schemas.User);

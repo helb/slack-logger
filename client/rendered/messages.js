@@ -1,3 +1,3 @@
 Template.messages.rendered = function(){
-	setTimeout(scrollMessages, 150);
-}
+    setTimeout(scrollMessages, 150);
+};
