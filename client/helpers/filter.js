@@ -3,9 +3,6 @@ Template.filter.helpers({
         return Session.get("searchScopeId");
     },
     scopedRoute: function(name, target) {
-        console.log("name", name);
-        console.log("target", target);
-
         if (name === target) {
             return true;
         } else {
