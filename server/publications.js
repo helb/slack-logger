@@ -88,7 +88,7 @@ Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId) {
 
     if (type === "fulltext") {
         searchFilter = {
-            content: new RegExp("(" + searchValue.replace(/[\/\\\|\(\)\*\.\[\]\?\!\+\-]/, "").replace(" ", "|") + ")")
+            content: new RegExp("(" + searchValue.replace(/[\/\\\|\(\)\*\.\[\]\?\!\+\-]/, "").replace(" ", "|") + ")", "i")
         };
         filter = mergeObjects(searchFilter, scopeFilter);
         console.log("fulltext: ", filter);
