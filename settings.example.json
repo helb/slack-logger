@@ -3,5 +3,8 @@
     "emojiURLs": [
         "https://api.github.com/emojis",
         "https://slack.com/api/emoji.list?token={{SLACK_TOKEN}}"
-    ]
+    ],
+    "public": {
+        "teamName": "…"
+    }
 }
