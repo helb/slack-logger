@@ -1,0 +1,30 @@
+{
+    "rules": {
+        "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+        "strict": 0,
+        "quotes": [2, "double"],
+        "no-underscore-dangle": 0,
+        "curly": 0
+    },
+
+    "env": {
+        "browser": true,
+        "node": true,
+        "meteor": true
+    },
+    
+    "globals": {
+        "Schemas": true,
+        "SimpleSchema": true,
+        "q": true,
+        "qa": true,
+        "moment": true,
+        "scrollMessages": true,
+        "slackFormat": true,
+        "Slack": true,
+        "Channels": true,
+        "Users": true,
+        "Messages": true,
+        "Emojis": true
+    }
+}
