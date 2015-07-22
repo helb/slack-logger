@@ -12,10 +12,11 @@ var insertEmoji = function(match, p1) {
 
 
 var createUserLink = function(match, p1) {
-    var name = Users.find({
+    var user = Users.find({
         _id: p1
-    }).fetch()[0].userName;
-    return "<a href='/u/" + p1 + "'>@" + name + "</a>";
+    }).fetch()[0];
+    var tooltipName = user.realName || user.userName;
+    return "<a href='/u/" + p1 + "' title='" + tooltipName + "'>@" + user.userName + "</a>";
 };
 
 
