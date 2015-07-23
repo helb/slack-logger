@@ -22,14 +22,15 @@ var createUserLink = function(match, p1) {
 
 slackFormat = function(text) {
     return text
-        .replace("<!channel>", "@channel")
+        .replace(/<(.*)>/gi, "&lt;$1&gt;")
+        .replace("&lt;!channel&gt;", "@channel")
         .replace(/\n/g, "<br />")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
         .replace(/ ?\*([^\*]+)\* ?/gi, " <b>$1</b> ")
         .replace(/\b_([^_]+)_\b/gi, " <i>$1</i> ")
-        .replace(/<(https?:\/\/[^ ]*)>/, "<a href='$1'>$1</a>")
-        .replace(/<@(U[A-Z0-9]+)\|([a-z0-9]+)>/, "<a href='/u/$1'>@$2</a>") //user joined
-        .replace(/<@(U[A-Z0-9]+)>/g, createUserLink) //user mention
+        .replace(/&lt;(https?:\/\/[^ ]*)&gt;/, "<a href='$1'>$1</a>")
+        .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
+        .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
         .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
         .replace(/`([^`]*)`/gi, "<code>$1</code>")
         // .replace(/> (*)$/i, "<span class=indent>$1</span>")
