@@ -22,3 +22,7 @@ Template.registerHelper("routeName", function() {
 Template.registerHelper("teamName", function() {
     return Meteor.settings.public.teamName;
 });
+
+Template.registerHelper("formatMessage", function(text) {
+    return slackFormat(text);
+});

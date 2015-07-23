@@ -10,8 +10,5 @@ Template.search.helpers({
         } else {
             return null;
         }
-    },
-    formatMessage: function(text) {
-        return slackFormat(text);
     }
 });
