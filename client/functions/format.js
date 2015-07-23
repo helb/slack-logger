@@ -22,8 +22,8 @@ var createUserLink = function(match, p1) {
 
 slackFormat = function(text) {
     return text
-        .replace(/<(.*)>/gi, "&lt;$1&gt;")
-        .replace("&lt;!channel&gt;", "@channel")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace("&lt;\!channel&gt;", "@channel")
         .replace(/\n/g, "<br />")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
         .replace(/ ?\*([^\*]+)\* ?/gi, " <b>$1</b> ")
