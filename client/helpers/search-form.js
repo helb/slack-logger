@@ -1,4 +1,4 @@
-Template.filter.helpers({
+Template.searchForm.helpers({
     scopeId: function() {
         return Session.get("searchScopeId");
     },

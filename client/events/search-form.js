@@ -1,4 +1,4 @@
-Template.filter.events({
+Template.searchForm.events({
     "submit .filter": function(event) {
         event.preventDefault();
         Session.set("searchValue", q("input.search").value);

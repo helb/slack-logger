@@ -5,6 +5,6 @@ Template.channels.rendered = function() {
             var channeliD = window.location.href.replace(/.*\//, "");
             var activeChannel = q(".channels .channel-link[href='/c/" + channeliD + "']");
             activeChannel.classList.add("active");
-        }, 150);
+        }, 300);
     }
 };
