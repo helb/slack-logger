@@ -13,4 +13,3 @@ momentjs:moment
 http
 dburles:collection-helpers
 raix:handlebar-helpers
-meteorhacks:search-source
