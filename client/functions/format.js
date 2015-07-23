@@ -29,6 +29,7 @@ slackFormat = function(text) {
         .replace(/ ?\*([^\*]+)\* ?/gi, " <b>$1</b> ")
         .replace(/\b_([^_]+)_\b/gi, " <i>$1</i> ")
         .replace(/&lt;(https?:\/\/[^ ]*)&gt;/, "<a href='$1'>$1</a>")
+        .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/g, "<a href='$1'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
         .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
