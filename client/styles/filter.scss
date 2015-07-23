@@ -48,7 +48,8 @@
 
             &:hover,
             &:active {
-                background-color: $sidebar-darker-bg;
+                background-color: $sidebar-accent-color;
+                color: $sidebar-color;
                 letter-spacing: 0.25em;
             }
         }
