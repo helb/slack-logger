@@ -65,9 +65,9 @@ slackFormat = function(text) {
         .replace(/(^|\s)\*([^\*]+)\*(\s|$)?/gi, "$1<b>$2</b>$3")
         .replace(/(^|\s)_([^_]+)_(\s|$)?/gi, "$1<i>$2</i>$3")
         .replace(/\n/g, "<br />")
-        .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1'>$1</a>")
-        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1'>$2</a>")
-        .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1'>$2</a>")
+        .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1' target='_blank'>$1</a>")
+        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
+        .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
         .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
