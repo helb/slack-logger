@@ -19,17 +19,55 @@ var createUserLink = function(match, p1) {
     return "<a href='/u/" + p1 + "' title='" + tooltipName + "'>@" + user.userName + "</a>";
 };
 
+var urlRegex = // from https://gist.github.com/dperini/729294
+    // protocol identifier
+    "(?:(?:https?|ftp)://)" +
+    // user:pass authentication
+    "(?:\\S+(?::\\S*)?@)?" +
+    "(?:" +
+    // IP address exclusion
+    // private & local networks
+    "(?!(?:10|127)(?:\\.\\d{1,3}){3})" +
+    "(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})" +
+    "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})" +
+    // IP address dotted notation octets
+    // excludes loopback network 0.0.0.0
+    // excludes reserved space >= 224.0.0.0
+    // excludes network & broacast addresses
+    // (first & last IP address of each class)
+    "(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])" +
+    "(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}" +
+    "(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))" +
+    "|" +
+    // host name
+    "(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)" +
+    // domain name
+    "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*" +
+    // TLD identifier
+    "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
+    // TLD may end with dot
+    "\\.?" +
+    ")" +
+    // port number
+    "(?::\\d{2,5})?" +
+    // resource path
+    "(?:[/?#]\\S*)?";
 
 slackFormat = function(text) {
     return text
-        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        // .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        // .replace(/[-]+&gt;/g, "→")
+        // .replace(/&lt;[-]+/g, "←")
         .replace("&lt;\!channel&gt;", "@channel")
-        .replace(/\n/g, "<br />")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
-        .replace(/ ?\*([^\*]+)\* ?/gi, " <b>$1</b> ")
-        .replace(/\b_([^_]+)_\b/gi, " <i>$1</i> ")
-        .replace(/&lt;(https?:\/\/[^ ]*)&gt;/, "<a href='$1'>$1</a>")
-        .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/g, "<a href='$1'>$2</a>")
+        .replace(/(^|\s)\*([^\*]+)\*(\s|$)?/gi, "$1<b>$2</b>$3")
+        .replace(/(^|\s)_([^_]+)_(\s|$)?/gi, "$1<i>$2</i>$3")
+        .replace(/\n/g, "<br />")
+        .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1'>$1</a>")
+        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1'>$2</a>")
+        .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
         .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
