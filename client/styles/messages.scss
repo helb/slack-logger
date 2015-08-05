@@ -96,6 +96,24 @@
                 text-decoration: underline;
             }
         }
+        
+        .message-flag {
+            padding: 0.25em;
+            border-radius: 0.25em;
+            font-weight: bold;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            
+            &.edited {
+                background: $edited-message-bg;
+                color: $edited-message-color;
+            }
+            
+            &.deleted {
+                background: $deleted-message-bg;
+                color: $deleted-message-color;
+            }
+        }
     }
 
     .message-content {

@@ -69,22 +69,17 @@ Meteor.startup(function() {
 });
 
 var dispatchEvent = function(message) {
-    // Meteor.call("logSlackEvent", message)
+    var created = message.ts | 0; // get rid of decimals
 
-    if (message.type === "message" && message.text) {
-        var created = message.ts | 0;
+    var messageDocument = {
+        content: message.text,
+        author: message.user,
+        channel: message.channel,
+        type: message.subtype || message.type,
+        created: new Date(created * 1000)
+    };
 
-        var messageDocument = {
-            content: message.text,
-            author: message.user,
-            channel: message.channel,
-            created: new Date(created * 1000)
-        };
-
-        Meteor.call("addMessage", messageDocument);
-    } else {
-        console.log(message);
-    }
+    Meteor.call("addMessage", messageDocument);
 };
 
 slack.on("message", Meteor.bindEnvironment(function(message) {
