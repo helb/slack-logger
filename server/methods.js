@@ -1,8 +1,4 @@
 Meteor.methods({
-    /*    logSlackEvent: function(slackEvent) {
-            return Events.insert(slackEvent);
-            // console.log(slackEvent);
-        },*/
     addMessage: function(message) {
         return Messages.insert(message);
         // console.log(slackEvent);

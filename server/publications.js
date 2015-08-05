@@ -43,10 +43,6 @@ Meteor.publish("users", function() {
     return Users.find();
 });
 
-/*Meteor.publish("events", function() {
-    return Events.find();
-});*/
-
 Meteor.publish("emoji", function(id) {
     return Emojis.find({
         _id: id
@@ -55,10 +51,11 @@ Meteor.publish("emoji", function(id) {
 
 var mergeObjects = function(obj1, obj2) {
     var obj3 = {};
-    for (var attrname in obj1) {
+    var attrname;
+    for (attrname in obj1) {
         obj3[attrname] = obj1[attrname];
     }
-    for (var attrname in obj2) {
+    for (attrname in obj2) {
         obj3[attrname] = obj2[attrname];
     }
     return obj3;

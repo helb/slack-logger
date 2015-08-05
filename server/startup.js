@@ -71,7 +71,7 @@ Meteor.startup(function() {
 var dispatchEvent = function(message) {
     // Meteor.call("logSlackEvent", message)
 
-    if (message.type === "message") {
+    if (message.type === "message" && message.text) {
         var created = message.ts | 0;
 
         var messageDocument = {
@@ -82,6 +82,8 @@ var dispatchEvent = function(message) {
         };
 
         Meteor.call("addMessage", messageDocument);
+    } else {
+        console.log(message);
     }
 };
 
