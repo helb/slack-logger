@@ -19,17 +19,12 @@ var createUserLink = function(match, p1) {
     return "<a href='/u/" + p1 + "' title='" + tooltipName + "'>@" + user.userName + "</a>";
 };
 
-var urlRegex = // from https://gist.github.com/dperini/729294
+var urlRegex = // based on https://gist.github.com/dperini/729294
     // protocol identifier
     "(?:(?:https?|ftp)://)" +
     // user:pass authentication
     "(?:\\S+(?::\\S*)?@)?" +
     "(?:" +
-    // IP address exclusion
-    // private & local networks
-    "(?!(?:10|127)(?:\\.\\d{1,3}){3})" +
-    "(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})" +
-    "(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})" +
     // IP address dotted notation octets
     // excludes loopback network 0.0.0.0
     // excludes reserved space >= 224.0.0.0
