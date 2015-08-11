@@ -19,6 +19,13 @@ var createUserLink = function(match, p1) {
     return "<a href='/u/" + p1 + "' title='" + tooltipName + "'>@" + user.userName + "</a>";
 };
 
+var createChannelLink = function(match, p1) {
+    var channel = Channels.find({
+        _id: p1
+    }).fetch()[0];
+    return "<a href='/c/" + p1 + "'>@" + channel.name + "</a>";
+};
+
 var urlRegex = // based on https://gist.github.com/dperini/729294
     // protocol identifier
     "(?:(?:https?|ftp)://)" +
@@ -69,6 +76,7 @@ slackFormat = function(text) {
         .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
+        .replace(/&lt;#(C[A-Z0-9]+)&gt;/g, createChannelLink) //channel link
         .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
         .replace(/`([^`]*)`/gi, "<code>$1</code>")
         // .replace(/> (*)$/i, "<span class=indent>$1</span>")
