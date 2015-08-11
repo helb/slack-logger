@@ -49,6 +49,10 @@ var urlRegex = // based on https://gist.github.com/dperini/729294
     "(?:[/?#]\\S*)?";
 
 slackFormat = function(text) {
+    if(!text){
+        return false;
+    }
+
     return text
         // .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
