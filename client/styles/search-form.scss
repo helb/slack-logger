@@ -45,6 +45,15 @@
             top: -2.5rem;
             transition: all 0.33s;
             width: 7rem;
+            overflow: hidden;
+            white-space: nowrap;
+            
+            .icon {
+                display: inline-block;
+                transform: rotate(45deg);
+                margin-right: 0.5em;
+                font-weight: bold;
+            }
 
             &:hover,
             &:active {
