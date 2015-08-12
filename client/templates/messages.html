@@ -23,10 +23,10 @@
                         <a href="/m/{{_id}}">{{formatDate created}}</a>
                     </div>
                     {{#if $eq type "message_changed"}}
-                        <span class="edited message-flag">edited</span>
+                        <span class="message-flag edited">↑ edited</span>
                     {{/if}}
                     {{#if $eq type "message_deleted"}}
-                        <span class="deleted message-flag">deleted</span>
+                        <span class="message-flag deleted">&times; deleted</span>
                     {{/if}}
                 </header>
                 <div class="message-content">

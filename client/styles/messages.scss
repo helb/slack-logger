@@ -98,20 +98,26 @@
         }
         
         .message-flag {
-            padding: 0.25em;
+            padding: 0.25em 0.33em;
             border-radius: 0.25em;
             font-weight: bold;
             font-size: 0.8em;
             text-transform: uppercase;
-            
+            cursor: default;
+            border: 0.2em solid transparent;
+        }
+                
+        .message-flag {
             &.edited {
                 background: $edited-message-bg;
                 color: $edited-message-color;
+                border-color: darken($edited-message-bg, 5%);
             }
             
             &.deleted {
                 background: $deleted-message-bg;
                 color: $deleted-message-color;
+                border-color: darken($deleted-message-bg, 5%);
             }
         }
     }
