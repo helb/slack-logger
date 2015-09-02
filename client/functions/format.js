@@ -28,7 +28,7 @@ var createChannelLink = function(match, p1) {
 
 var urlRegex = // based on https://gist.github.com/dperini/729294
     // protocol identifier
-    "(?:(?:https?|ftp)://)" +
+    "(?:(?:https?|ftp):\/\/)" +
     // user:pass authentication
     "(?:\\S+(?::\\S*)?@)?" +
     "(?:" +
@@ -61,18 +61,15 @@ slackFormat = function(text) {
     }
 
     return text
-        // .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
-        // .replace(/[-]+&gt;/g, "→")
-        // .replace(/&lt;[-]+/g, "←")
+        .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1' target='_blank'>$1</a>")
+        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
         .replace("&lt;\!channel&gt;", "@channel")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
         .replace(/(^|\s)\*([^\*]+)\*(\s|$)?/gi, "$1<b>$2</b>$3")
         .replace(/(^|\s)_([^_]+)_(\s|$)?/gi, "$1<i>$2</i>$3")
         .replace(/\n/g, "<br />")
-        .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1' target='_blank'>$1</a>")
-        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9_\.-]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
