@@ -72,8 +72,8 @@ var dispatchEvent = function(message) {
     var created = message.ts | 0; // get rid of decimals
 
     var messageDocument = {
-        content: message.text,
-        author: message.user,
+        content: message.text || message.message.text,
+        author: message.user || message.message.user,
         channel: message.channel,
         type: message.subtype || message.type,
         created: new Date(created * 1000)
