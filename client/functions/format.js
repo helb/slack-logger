@@ -26,6 +26,14 @@ var createChannelLink = function(match, p1) {
     return "<a href='/c/" + p1 + "'>@" + channel.name + "</a>";
 };
 
+var createIndentedText = function(match, p1, p2) {
+    console.log(p1);
+    console.log(p2);
+    innerText = p2.replace(/&gt; /g, "");
+    return "<div class=indent>" + innerText + "</div>";
+};
+
+
 var urlRegex = // based on https://gist.github.com/dperini/729294
     // protocol identifier
     "(?:(?:https?|ftp):\/\/)" +
@@ -63,21 +71,20 @@ slackFormat = function(text) {
     return text
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
+        .replace(/\n/g, "<br />")
+        .replace(/^(&gt;)\s+(.*)/g, createIndentedText)
+        .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
+        .replace(/`([^`]*)`/gi, "<code>$1</code>")
         .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1' target='_blank'>$1</a>")
         .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
         .replace("&lt;\!channel&gt;", "@channel")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
-        .replace(/(^|\s)\*([^\*]+)\*(\s|$)?/gi, "$1<b>$2</b>$3")
-        .replace(/(^|\s)_([^_]+)_(\s|$)?/gi, "$1<i>$2</i>$3")
-        .replace(/\n/g, "<br />")
+        .replace(/(^|\s)\*([^\*]+)(?![^<]*>|[^<>]*<\/)\*(\s|$)?/gi, "$1<b>$2</b>$3")
+        .replace(/(^|\s)_([^_]+)(?![^<]*>|[^<>]*<\/)_(\s|$)?/gi, "$1<i>$2</i>$3")
         .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9_\.-]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
         .replace(/&lt;#(C[A-Z0-9]+)&gt;/g, createChannelLink) //channel link
-        .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
-        .replace(/`([^`]*)`/gi, "<code>$1</code>")
-        // .replace(/> (*)$/i, "<span class=indent>$1</span>")
     ;
     // https://slack.zendesk.com/hc/en-us/articles/202288908-Formatting-your-messages
-    // TODO indent, multiline <blockquote>
 };

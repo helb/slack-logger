@@ -155,8 +155,8 @@
         }
 
         .indent {
-            padding-left: 2em;
-            line-height: 2em;
+            padding-left: 1em;
+            border-left: 0.3em solid $indent-line;
         }
 
         a,
