@@ -27,8 +27,6 @@ var createChannelLink = function(match, p1) {
 };
 
 var createIndentedText = function(match, p1, p2) {
-    console.log(p1);
-    console.log(p2);
     innerText = p2.replace(/&gt; /g, "");
     return "<div class=indent>" + innerText + "</div>";
 };
