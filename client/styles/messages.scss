@@ -1,6 +1,10 @@
 @import "colors";
 @import "sizes";
 
+.message-container {
+    padding-left: 1rem;
+}
+
 .load-older {
     background-color: $sidebar-accent-color;
     color: $sidebar-color;
