@@ -55,7 +55,7 @@ Messages.attachSchema(Schemas.Message);
 
 Messages.helpers({
     authorRef: function() {
-        return Users.findOne(this.author);
+        return slackUsers.findOne(this.author);
     },
     channelRef: function() {
         return Channels.findOne(this.channel);

@@ -1,6 +1,6 @@
-Users = new Meteor.Collection("users");
+slackUsers = new Meteor.Collection("slackusers");
 
-Schemas.User = new SimpleSchema({
+Schemas.slackUser = new SimpleSchema({
     userName: {
         type: String,
         label: "User name"
@@ -16,4 +16,4 @@ Schemas.User = new SimpleSchema({
     }
 });
 
-Users.attachSchema(Schemas.User);
+slackUsers.attachSchema(Schemas.slackUser);

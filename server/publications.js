@@ -39,8 +39,8 @@ Meteor.publish("channels", function() {
     return Channels.find();
 });
 
-Meteor.publish("users", function() {
-    return Users.find();
+Meteor.publish("slackUsers", function() {
+    return slackUsers.find();
 });
 
 Meteor.publish("emoji", function(id) {

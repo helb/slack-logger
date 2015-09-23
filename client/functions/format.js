@@ -12,7 +12,7 @@ var insertEmoji = function(match, p1) {
 
 
 var createUserLink = function(match, p1) {
-    var user = Users.find({
+    var user = slackUsers.find({
         _id: p1
     }).fetch()[0];
     var tooltipName = user.realName || user.userName;

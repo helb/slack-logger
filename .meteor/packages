@@ -25,3 +25,5 @@ ejson
 spacebars
 check
 session
+acemtp:accounts-slack
+accounts-ui-unstyled

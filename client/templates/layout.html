@@ -9,7 +9,11 @@
             {{> sidebar}}
         </div>
         <div class="messages">
-            {{> yield}}
+            {{!-- {{#unless currentUser}} --}}
+                {{!-- {{> login}} --}}
+            {{!-- {{else}} --}}
+                {{> yield}}
+            {{!-- {{/unless}} --}}
         </div>
     </div>
 </template>

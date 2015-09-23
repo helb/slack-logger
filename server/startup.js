@@ -21,11 +21,11 @@ Meteor.startup(function() {
         });
     console.log("Channels loaded.");
 
-    Users.remove({});
+    slackUsers.remove({});
     var usersJson = JSON.parse(HTTP.get("https://slack.com/api/users.list?token=" + Meteor.settings.slackToken, httpOptions).content);
     usersJson.members.forEach(
         function(user) {
-            Users.insert({
+            slackUsers.insert({
                 _id: user.id,
                 userName: user.name,
                 realName: user.real_name,
