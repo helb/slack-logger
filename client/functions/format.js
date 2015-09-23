@@ -31,6 +31,16 @@ var createIndentedText = function(match, p1, p2) {
     return "<div class=indent>" + innerText + "</div>";
 };
 
+function replaceOutsideCode(str, pattern, replacement) {
+  var codeTags = /(<code>.*?<\/code>)|(<pre>.*?<\/pre>)|(<[^<]*?>)/i;
+  return str.split(codeTags).map(function(s) {
+    if ("" + s !== s)
+      return "";
+    if (s.match(codeTags))
+      return s;
+    return s.replace(pattern, replacement);
+  }).join('');
+};
 
 var urlRegex = // based on https://gist.github.com/dperini/729294
     // protocol identifier
@@ -66,7 +76,7 @@ slackFormat = function(text) {
         return false;
     }
 
-    return text
+    text = text
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/\n/g, "<br />")
@@ -77,12 +87,17 @@ slackFormat = function(text) {
         .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
         .replace("&lt;\!channel&gt;", "@channel")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
-        .replace(/(^|\s)\*([^\*]+)(?![^<]*>|[^<>]*<\/)\*(\s|$)?/gi, "$1<b>$2</b>$3")
+        // .replace(/\*([^\*]+)\*/gi, "<b>$1</b>")
+        // .replace(/_([^_]+)_/gi, "<i>$1</i>")
         .replace(/(^|\s)_([^_]+)(?![^<]*>|[^<>]*<\/)_(\s|$)?/gi, "$1<i>$2</i>$3")
         .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9_\.-]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
         .replace(/&lt;@(U[A-Z0-9]+)&gt;/g, createUserLink) //user mention
         .replace(/&lt;#(C[A-Z0-9]+)&gt;/g, createChannelLink) //channel link
     ;
+
+    text = replaceOutsideCode(text, new RegExp("\\*([^\\*]+)\\*", "gi"), "<b>$1</b>");
+    text = replaceOutsideCode(text, new RegExp("_([^_]+)_", "gi"), "<i>$1</i>");
+    return text;
     // https://slack.zendesk.com/hc/en-us/articles/202288908-Formatting-your-messages
 };
