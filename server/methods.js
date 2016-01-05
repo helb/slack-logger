@@ -31,7 +31,7 @@ Meteor.methods({
         console.log(returnVal);
     },
     removeMessage: function(id, key) {
-        if (key === "rybu") {
+        if (key === Meteor.settings.removeKey) {
             return Messages.remove({
                 _id: id
             });
