@@ -1,6 +1,6 @@
-$sidebar-bg: #232327;
+$sidebar-bg: rgb(48, 62, 77);
 $sidebar-color: #fff;
-$sidebar-accent-color: #828499;
+$sidebar-accent-color: lighten(rgb(48, 62, 77), 50%);
 $sidebar-darker-bg: darken($sidebar-bg, 5%);
 
 $base-color: #222;
