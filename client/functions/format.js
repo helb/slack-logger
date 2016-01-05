@@ -32,14 +32,14 @@ var createIndentedText = function(match, p1, p2) {
 };
 
 function replaceOutsideCode(str, pattern, replacement) {
-  var codeTags = /(<code>.*?<\/code>)|(<pre>.*?<\/pre>)|(<[^<]*?>)/i;
-  return str.split(codeTags).map(function(s) {
-    if ("" + s !== s)
-      return "";
-    if (s.match(codeTags))
-      return s;
-    return s.replace(pattern, replacement);
-  }).join('');
+    var codeTags = /(<code>.*?<\/code>)|(<pre>.*?<\/pre>)|(<[^<]*?>)/i;
+    return str.split(codeTags).map(function(s) {
+        if ("" + s !== s)
+            return "";
+        if (s.match(codeTags))
+            return s;
+        return s.replace(pattern, replacement);
+    }).join("");
 };
 
 var urlRegex = // based on https://gist.github.com/dperini/729294
@@ -72,7 +72,7 @@ var urlRegex = // based on https://gist.github.com/dperini/729294
     "(?:[/?#]\\S*)?";
 
 slackFormat = function(text) {
-    if(!text){
+    if (!text) {
         return false;
     }
 
@@ -84,11 +84,9 @@ slackFormat = function(text) {
         .replace(/(```)([^`]*)(```)/gi, "<pre>$2</pre>").replace(/<pre>([\b])*<br \/>/, "<pre>")
         .replace(/`([^`]*)`/gi, "<code>$1</code>")
         .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1' target='_blank'>$1</a>")
-        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
+        .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*?)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
         .replace("&lt;\!channel&gt;", "@channel")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
-        // .replace(/\*([^\*]+)\*/gi, "<b>$1</b>")
-        // .replace(/_([^_]+)_/gi, "<i>$1</i>")
         .replace(/(^|\s)_([^_]+)(?![^<]*>|[^<>]*<\/)_(\s|$)?/gi, "$1<i>$2</i>$3")
         .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
         .replace(/&lt;@(U[A-Z0-9]+)\|([a-z0-9_\.-]+)&gt;/, "<a href='/u/$1'>@$2</a>") //user joined
