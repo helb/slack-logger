@@ -1,4 +1,5 @@
 {
+    "loadHistory": true,
     "slackToken": "…",
     "emojiURLs": [
         "https://api.github.com/emojis",

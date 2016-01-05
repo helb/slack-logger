@@ -3,8 +3,8 @@ Meteor.methods({
         if(Match.test(message, Schemas.Message)){
             return Messages.insert(message);
         } else {
-            console.log(message);
-            return false;
+            console.log("\n", message, "\n");
+            throw "Invalid message."
         }
     },
     searchMsgs: function(searchValue) {

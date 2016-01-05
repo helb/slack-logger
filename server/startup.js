@@ -2,6 +2,20 @@ var autoReconnect = true;
 var autoMark = true;
 var slack = new Slack(Meteor.settings.slackToken, autoReconnect, autoMark);
 
+var dispatchEvent = function(message) {
+    var created = message.ts | 0; // get rid of decimals
+
+    var messageDocument = {
+        content: message.content || message.text || message.message.text,
+        author: message.user || message.message.user,
+        channel: message.channel,
+        type: message.subtype || message.type,
+        created: new Date(created * 1000)
+    };
+
+    Meteor.call("addMessage", messageDocument);
+};
+
 Meteor.startup(function() {
     var httpOptions = {
         timeout: 5000,
@@ -68,25 +82,27 @@ Meteor.startup(function() {
                         });
                     }
                 });
-            console.log("Emoji from " + url + " loaded.");
         });
+
+    if (Meteor.settings.loadHistory) {
+        HTTP.get("https://slack.com/api/channels.list?token=" + Meteor.settings.slackToken, httpOptions, function(error, result) {
+            if (result.data.channels) {
+                result.data.channels.forEach(function(channel) {
+                    HTTP.get("https://slack.com/api/channels.history?token=" + Meteor.settings.slackToken + "&channel=" + channel.id, httpOptions, function(error, result) {
+                        if (result.data.messages) {
+                            result.data.messages.forEach(function(message) {
+                                message.channel = channel.id;
+                                dispatchEvent(message);
+                            });
+                        }
+                    });
+                });
+            }
+        });
+    };
 
     slack.login();
 });
-
-var dispatchEvent = function(message) {
-    var created = message.ts | 0; // get rid of decimals
-
-    var messageDocument = {
-        content: message.text || message.message.text,
-        author: message.user || message.message.user,
-        channel: message.channel,
-        type: message.subtype || message.type,
-        created: new Date(created * 1000)
-    };
-
-    Meteor.call("addMessage", messageDocument);
-};
 
 slack.on("message", Meteor.bindEnvironment(function(message) {
     dispatchEvent(message);
