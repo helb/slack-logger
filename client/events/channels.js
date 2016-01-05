@@ -4,6 +4,5 @@ Template.channels.events({
             link.classList.remove("active");
         });
         event.target.classList.add("active");
-        setTimeout(scrollMessages, 500);
     }
 });
