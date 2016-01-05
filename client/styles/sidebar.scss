@@ -4,15 +4,17 @@
     background: $sidebar-bg;
     border-right: 0.1rem solid $sidebar-darker-bg;
     color: $sidebar-color;
+    display: flex;
+    flex-direction: column;
 
     .logo {
-        padding: 1rem 1rem 0.5rem;
         font-size: 1.5em;
+        padding: 1rem 1rem 0.5rem;
 
         a {
             color: $sidebar-color;
-            text-decoration: none;
             outline: none;
+            text-decoration: none;
 
             &:hover {
                 color: $sidebar-color;

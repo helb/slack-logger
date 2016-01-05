@@ -7,10 +7,10 @@
         border-top: 1px solid $sidebar-darker-bg;
         color: $sidebar-accent-color;
         display: block;
+        outline: none;
         padding: 0.25rem 1rem;
         text-decoration: none;
         transition: all 0.15s;
-        outline: none;
 
         &:last-child {
             border-bottom: 1px solid $sidebar-darker-bg;
@@ -24,8 +24,8 @@
 
         .hash {
             color: mix($sidebar-accent-color, $sidebar-bg, 40%);
-            margin-right: 0.2em;
             font-weight: bold;
+            margin-right: 0.2em;
         }
     }
 }
