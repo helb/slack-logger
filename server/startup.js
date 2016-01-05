@@ -6,33 +6,39 @@ Meteor.startup(function() {
     var httpOptions = {
         timeout: 5000,
         headers: {
-            "User-Agent": "Meteor"
+            "User-Agent": "Slack Logger"
         }
     };
 
     Channels.remove({});
-    var channelsJson = JSON.parse(HTTP.get("https://slack.com/api/channels.list?token=" + Meteor.settings.slackToken, httpOptions).content);
-    channelsJson.channels.forEach(
-        function(channel) {
-            Channels.insert({
-                _id: channel.id,
-                name: channel.name
+    HTTP.get("https://slack.com/api/channels.list?token=" + Meteor.settings.slackToken, httpOptions, function(error, result) {
+        if (result.data.channels) {
+            result.data.channels.forEach(function(channel) {
+                Channels.insert({
+                    _id: channel.id,
+                    name: channel.name
+                });
             });
-        });
-    console.log("Channels loaded.");
+        } else {
+            throw "An error occurred when loading channels. " + error;
+        }
+    });
 
     slackUsers.remove({});
-    var usersJson = JSON.parse(HTTP.get("https://slack.com/api/users.list?token=" + Meteor.settings.slackToken, httpOptions).content);
-    usersJson.members.forEach(
-        function(user) {
-            slackUsers.insert({
-                _id: user.id,
-                userName: user.name,
-                realName: user.real_name,
-                avatarUrl: user.profile.image_72
+    HTTP.get("https://slack.com/api/users.list?token=" + Meteor.settings.slackToken, httpOptions, function(error, result) {
+        if (result.data.members) {
+            result.data.members.forEach(function(user) {
+                slackUsers.insert({
+                    _id: user.id,
+                    userName: user.name,
+                    realName: user.real_name,
+                    avatarUrl: user.profile.image_72
+                });
             });
-        });
-    console.log("Users loaded.");
+        } else {
+            throw "An error occurred when loading users. " + error;
+        }
+    });
 
     Emojis.remove({});
     Meteor.settings.emojiURLs.forEach(
