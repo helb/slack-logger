@@ -1,9 +1,9 @@
 @import "colors";
 
 .channels {
+    flex: 1;
     margin: 1em 0;
     overflow-y: auto;
-    flex: 1;
 
     a {
         border-top: 1px solid $sidebar-darker-bg;

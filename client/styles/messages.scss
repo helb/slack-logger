@@ -2,16 +2,17 @@
 @import "sizes";
 
 .message-container {
-    padding-left: 1rem;
+    padding: 0.5em 0 0 1em;
 }
 
 .load-older {
     background-color: $sidebar-accent-color;
     color: $sidebar-color;
     cursor: pointer;
-    height: 2rem;
+    height: 1em;
     letter-spacing: 0.1em;
-    margin: -1rem -1rem 1rem;
+    line-height: 1em;
+    margin-bottom: 1em;
     padding: 1rem 1rem 1.5rem;
     text-align: center;
     text-transform: uppercase;
@@ -20,11 +21,31 @@
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    white-space: nowrap;
+    width: 100%;
 
     &:hover,
+    &:focus,
     &:active {
         background-color: lighten($sidebar-accent-color, 10%);
         letter-spacing: 0.25em;
+    }
+
+    &::after {
+        background-color: lighten($sidebar-accent-color, 10%);
+        content: "LOADING…";
+        display: block;
+        height: 2.5em;
+        line-height: 3em;
+        opacity: 0;
+        position: relative;
+        top: -2em;
+        transition: opacity 0.33s;
+        width: 100%;
+    }
+
+    &:active::after {
+        opacity: 1;
     }
 }
 
@@ -143,11 +164,10 @@
             color: $code-color;
             font-family: monospace;
             padding: 0.25em;
-            white-space: pre-wrap;       // css-3
-            white-space: -moz-pre-wrap;  // Mozilla, since 1999
-            white-space: -pre-wrap;      // Opera 4-6
-            white-space: -o-pre-wrap;    // Opera 7
-            word-wrap: break-word;       // Internet Explorer 5.5+
+        }
+
+        pre {
+            overflow-x: auto;
         }
 
         blockquote {
@@ -183,7 +203,6 @@
         flex-direction: column;
 
         .message-header {
-            border-bottom: 1px solid $avatar-border;
             border-right: 0;
             line-height: 1.2em;
             text-align: left;
