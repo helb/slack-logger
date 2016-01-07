@@ -1,5 +1,6 @@
 .page {
     display: flex;
+    min-width: 40em;
 }
 
 .sidebar {
@@ -12,8 +13,8 @@
 
 .messages {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
     margin-left: 18em;
     overflow-y: auto;
     width: calc(100% - 18em);

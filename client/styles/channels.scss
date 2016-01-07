@@ -10,9 +10,34 @@
         color: $sidebar-accent-color;
         display: block;
         outline: none;
-        padding: 0.25rem 1rem;
+        padding: 0.25em 1rem 0;
         text-decoration: none;
         transition: all 0.15s;
+        width: 100%;
+
+        &::after {
+            border: solid transparent;
+            border-color: transparent;
+            border-left-color: $sidebar-darker-bg;
+            border-width: 1em;
+            content: " ";
+            display: inline-block;
+            float: right;
+            height: 0;
+            left: 16.5em;
+            margin-top: -0.3em;
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            transition: left 0.5s;
+            width: 0;
+            z-index: -9999;
+        }
+
+        &.active::after {
+            left: 17.5em;
+            opacity: 1;
+        }
 
         &:last-child {
             border-bottom: 1px solid $sidebar-darker-bg;
