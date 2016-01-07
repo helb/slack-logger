@@ -107,6 +107,8 @@ Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId) {
             filter = mergeObjects(searchFilter, scopeFilter);
             console.log("  regexp: ", filter);
             return Messages.find(filter);
+        } else {
+            console.log("  regexp: ", filter, " -- invalid");
         }
     }
 });
