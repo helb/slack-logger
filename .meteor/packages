@@ -28,3 +28,4 @@ accounts-ui-unstyled
 kadira:flow-router
 kadira:blaze-layout
 reactive-var
+meteorhacks:kadira
