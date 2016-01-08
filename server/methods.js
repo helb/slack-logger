@@ -28,7 +28,6 @@ Meteor.methods({
                 }
             }
         });
-        console.log(returnVal);
     },
     removeMessage: function(id, key) {
         if (key === Meteor.settings.removeKey) {

@@ -44,8 +44,6 @@ Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId, lim
         return null;
     }
 
-    console.log(searchValue, type, scope, scopeId);
-
     var scopeFilter = {};
 
     if (scope && scopeId) {
