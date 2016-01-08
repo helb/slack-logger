@@ -7,8 +7,13 @@
         "https://api.github.com/emojis",
         "https://slack.com/api/emoji.list?token={{SLACK_TOKEN}}" // {{SLACK_TOKEN}} will be replaced with actual token
     ],
+    "kadira": { // kadira.io monitoring, optional
+        "appId": "…",
+        "appSecret": "…"
+    },
     "public": {
         "loadAtOnce": 10,    // load n messages initially (and +n when clicking on 'load older Messages')
         "teamName": "CZ.NIC" // Slack team name, used only in sidebar header
+        "defaultChannel": "general" // channel to view at the default ("/") route
     }
 }

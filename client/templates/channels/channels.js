@@ -7,6 +7,8 @@ Template.channels.onCreated(function() {
         if (subscription.ready()) {
             if (FlowRouter.getRouteName() === "channelDetail") {
                 q(".channel-link[href$='" + FlowRouter.getParam("channelId") + "']").classList.add("active");
+            } else if (FlowRouter.getRouteName() === "allMessages") {
+                FlowRouter.go("/c/" + Channels.findOne({name: Meteor.settings.public.defaultChannel})._id);
             }
         }
     });
