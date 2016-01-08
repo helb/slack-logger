@@ -1,11 +1,14 @@
 {
-    "loadHistory": true,
-    "slackToken": "…",
-    "emojiURLs": [
+    "offlineMode": true,     // don't connect to Slack
+    "loadHistory": false,    // load available history from Slack on start
+    "slackToken": "…",       // Slack API token
+    "removeKey": "…",        // key to remove messages via JS console
+    "emojiURLs": [           // URLs of emoji lists
         "https://api.github.com/emojis",
-        "https://slack.com/api/emoji.list?token={{SLACK_TOKEN}}"
+        "https://slack.com/api/emoji.list?token={{SLACK_TOKEN}}" // {{SLACK_TOKEN}} will be replaced with actual token
     ],
     "public": {
-        "teamName": "…"
+        "loadAtOnce": 10,    // load n messages initially (and +n when clicking on 'load older Messages')
+        "teamName": "CZ.NIC" // Slack team name, used only in sidebar header
     }
 }

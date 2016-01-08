@@ -1,6 +1,6 @@
-Meteor.publish("allMessages", function(currentLimit) {
-    return Messages.find({}, {
-        limit: currentLimit,
+Meteor.publish("messages", function(filter, limit) {
+    return Messages.find(filter, {
+        limit: limit,
         sort: {
             created: -1
         }
@@ -10,28 +10,6 @@ Meteor.publish("allMessages", function(currentLimit) {
 Meteor.publish("oneMessage", function(id) {
     return Messages.find({
         _id: id
-    });
-});
-
-Meteor.publish("channelMessages", function(id, currentLimit) {
-    return Messages.find({
-        channel: id
-    }, {
-        limit: currentLimit,
-        sort: {
-            created: -1
-        }
-    });
-});
-
-Meteor.publish("userMessages", function(id, currentLimit) {
-    return Messages.find({
-        author: id
-    }, {
-        limit: currentLimit,
-        sort: {
-            created: -1
-        }
     });
 });
 
@@ -61,14 +39,16 @@ var mergeObjects = function(obj1, obj2) {
     return obj3;
 };
 
-Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId) {
+Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId, limit) {
     if (!searchValue) {
         return null;
     }
 
+    console.log(searchValue, type, scope, scopeId);
+
     var scopeFilter = {};
 
-    if (scope) {
+    if (scope && scopeId) {
         if (scope === "channel") {
             scopeFilter = {
                 "channel": scopeId
@@ -89,7 +69,12 @@ Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId) {
         };
         filter = mergeObjects(searchFilter, scopeFilter);
         console.log("fulltext: ", filter);
-        return Messages.find(filter);
+        return Messages.find(filter, {
+            limit: limit,
+            sort: {
+                created: -1
+            }
+        });
     } else if (type === "regex") {
         var regexIsValid;
 
@@ -106,7 +91,12 @@ Meteor.publish("searchMessages", function(searchValue, type, scope, scopeId) {
             };
             filter = mergeObjects(searchFilter, scopeFilter);
             console.log("  regexp: ", filter);
-            return Messages.find(filter);
+            return Messages.find(filter, {
+                limit: limit,
+                sort: {
+                    created: -1
+                }
+            });
         } else {
             console.log("  regexp: ", filter, " -- invalid");
         }

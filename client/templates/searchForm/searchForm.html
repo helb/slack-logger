@@ -1,23 +1,23 @@
 <template name="searchForm">
     <form class="filter">
-        {{#if scopedRoute routeName "channel"}}
+        {{#if scopedRoute routeName "channelDetail"}}
             <p>
                 <input type="radio" name="search-scope" id="radio-all" class="radio" value="all" />
                 <label for="radio-all">All messages</label>
             </p>
             <p>
-                <input type="radio" name="search-scope" id="radio-channel" class="radio" value="channel" checked="checked" data-scopeid="{{scopeId ''}}" />
+                <input type="radio" name="search-scope" id="radio-channel" class="radio" value="channel" checked="checked" data-scopeid="{{scopeId}}" />
                 <label for="radio-channel">Current channel</label>
             </p>
         {{/if}}
 
-        {{#if scopedRoute routeName "user"}}
+        {{#if scopedRoute routeName "userDetail"}}
             <p>
                 <input type="radio" name="search-scope" id="radio-all" class="radio" value="all" />
                 <label for="radio-all">All messages</label>
             </p>
             <p>
-                <input type="radio" name="search-scope" id="radio-user" class="radio" value="user" checked="checked" data-scopeid="{{scopeId ''}}" />
+                <input type="radio" name="search-scope" id="radio-user" class="radio" value="user" checked="checked" data-scopeid="{{scopeId}}" />
                 <label for="radio-user">Current user</label>
             </p>
         {{/if}}

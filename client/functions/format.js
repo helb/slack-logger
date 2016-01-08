@@ -10,7 +10,6 @@ var insertEmoji = function(match, p1) {
     }
 };
 
-
 var createUserLink = function(match, p1) {
     var user = slackUsers.find({
         _id: p1
@@ -31,7 +30,7 @@ var createIndentedText = function(match, p1, p2) {
     return "<div class=indent>" + innerText + "</div>";
 };
 
-function replaceOutsideCode(str, pattern, replacement) {
+var replaceOutsideCode = function(str, pattern, replacement) {
     var codeTags = /(<code>.*?<\/code>)|(<pre>.*?<\/pre>)|(<[^<]*?>)/i;
     return str.split(codeTags).map(function(s) {
         if ("" + s !== s)

@@ -1,5 +1,6 @@
 <template name="messageDetail">
-    <div class="message-container">
+    {{#with message}}
+    <div class="message-container detail">
         <a href="/u/{{author}}"><img class="avatar" title="{{authorRef.userName}}" src="{{authorRef.avatarUrl}}" /></a>
         <div class="message detail">
             <header class="message-header">
@@ -22,4 +23,5 @@
             </div>
         </div>
     </div>
+    {{/with}}
 </template>
