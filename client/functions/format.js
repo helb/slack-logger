@@ -84,7 +84,7 @@ slackFormat = function(text) {
         .replace(/`([^`]*)`/gi, "<code>$1</code>")
         .replace(new RegExp("&lt;(" + urlRegex + ")&gt;", "gi"), "<a href='$1' target='_blank'>$1</a>")
         .replace(new RegExp("&lt;(" + urlRegex + ")[|](?!&gt;)(.*?)&gt;", "gi"), "<a href='$1' target='_blank'>$2</a>")
-        .replace("&lt;\!channel&gt;", "@channel")
+        .replace(/&lt;\!(channel|here)\|?@?(channel|here)?&gt;/, "@$1")
         .replace(/:([a-z0-9+_-]+):/gi, insertEmoji)
         .replace(/(^|\s)_([^_]+)(?![^<]*>|[^<>]*<\/)_(\s|$)?/gi, "$1<i>$2</i>$3")
         .replace(/&lt;(mailto:[^\|]+@[^\|]+)\|([^\|]+@[^\|]+)&gt;/gi, "<a href='$1' target='_blank'>$2</a>")
