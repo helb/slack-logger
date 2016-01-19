@@ -140,13 +140,13 @@
             &.edited {
                 background: $edited-message-bg;
                 border-color: darken($edited-message-bg, 5%);
-                color: $edited-message-color;
+                color: $edited-message-color;
             }
 
             &.deleted {
                 background: $deleted-message-bg;
                 border-color: darken($deleted-message-bg, 5%);
-                color: $deleted-message-color;
+                color: $deleted-message-color;
             }
         }
     }
