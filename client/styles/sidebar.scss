@@ -11,15 +11,15 @@
         font-size: 1.5em;
         font-weight: normal;
         padding: 1rem 1rem 0;
+    }
 
-        a {
+    .logo-link {
+        color: $sidebar-color;
+        outline: none;
+        text-decoration: none;
+
+        &:hover {
             color: $sidebar-color;
-            outline: none;
-            text-decoration: none;
-
-            &:hover {
-                color: $sidebar-color;
-            }
         }
     }
 
