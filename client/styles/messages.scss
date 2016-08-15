@@ -82,6 +82,15 @@
     }
 }
 
+.how-to-invite {
+    border: 0.1rem dashed lighten($base-color, 50%);
+    border-radius: 0.25em;
+    font-size: 2em;
+    margin: 1em auto;
+    padding: 0.5em;
+    text-align: center;
+}
+
 .message {
     display: flex;
     flex-direction: column;
