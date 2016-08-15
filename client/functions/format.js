@@ -93,8 +93,8 @@ slackFormat = function(text) {
         .replace(/&lt;#(C[A-Z0-9]+)&gt;/g, createChannelLink) //channel link
     ;
 
-    text = replaceOutsideCode(text, new RegExp("\\*([^\\*]+)\\*", "gi"), "<b>$1</b>");
-    text = replaceOutsideCode(text, new RegExp("_([^_]+)_", "gi"), "<i>$1</i>");
+    text = replaceOutsideCode(text, new RegExp("(\s)\\*([^\\*]+)\\*(\s)", "gi"), "$1<b>$2</b>$3");
+    text = replaceOutsideCode(text, new RegExp("(\s)_([^_]+)_(\s)", "gi"), "$1<i>$2</i>$3");
     return text;
     // https://slack.zendesk.com/hc/en-us/articles/202288908-Formatting-your-messages
 };
