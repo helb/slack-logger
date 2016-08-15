@@ -1,53 +1,32 @@
 Messages = new Meteor.Collection("messages");
 
 Schemas.Message = new SimpleSchema({
-    content: {
-        type: String,
-        label: "Content"
+    "_id": {
+        "type": String,
+        "regEx": /^U[A-Z0-9]{8}-C[A-Z0-9]{8}-[0-9]{10}\.[0-9]{6}$/,
+        "label": "ID"
     },
-    author: {
-        type: String,
-        regEx: /^U[A-Z0-9]+$/,
-        label: "Author"
+    "content": {
+        "type": String,
+        "label": "Content"
     },
-    channel: {
-        type: String,
-        regEx: /^C[A-Z0-9]+$/,
-        label: "Parent channel"
+    "author": {
+        "type": String,
+        "regEx": /^U[A-Z0-9]+$/,
+        "label": "Author"
     },
-    type: {
-        type: String,
-        allowedValues: [
-            "message",
-            "bot_message",
-            "me_message",
-            "message_changed",
-            "message_deleted",
-            "channel_join",
-            "channel_leave",
-            "channel_topic",
-            "channel_purpose",
-            "channel_name",
-            "channel_archive",
-            "channel_unarchive",
-            "group_join",
-            "group_leave",
-            "group_topic",
-            "group_purpose",
-            "group_name",
-            "group_archive",
-            "group_unarchive",
-            "file_share",
-            "file_comment",
-            "file_mention",
-            "pinned_item",
-            "unpinned_item"
-        ],
-        label: "Message type"
+    "channel": {
+        "type": String,
+        "regEx": /^C[A-Z0-9]+$/,
+        "label": "Parent channel"
     },
-    created: {
-        type: Date,
-        label: "Creation date"
+    "type": {
+        "type": String,
+        "label": "Message type"
+    },
+    "created": {
+        "type": Date,
+        "label": "Creation date"
     }
 });
 

@@ -1,7 +1,12 @@
 Meteor.methods({
     addMessage: function(message) {
         if(Match.test(message, Schemas.Message)){
-            return Messages.insert(message);
+            try {
+                return Messages.insert(message);
+            }
+            catch(e){
+                return false;
+            }
         } else {
             console.log("\n", message, "\n");
             throw "Invalid message."
