@@ -14,6 +14,6 @@
     "public": {
         "loadAtOnce": 10,    // load n messages initially (and +n when clicking on 'load older Messages')
         "teamName": "CZ.NIC" // Slack team name, used only in sidebar header
-        "defaultChannel": "general" // channel to view at the default ("/") route
+        "defaultChannel": "general" // channel to view at the default ("/") route
     }
 }
