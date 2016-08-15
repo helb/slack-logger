@@ -4,7 +4,7 @@
     "slackToken": "…",       // Slack API token
     "removeKey": "…",        // key to remove messages via JS console
     "emojiURLs": [           // URLs of emoji lists
-        "https://api.github.com/emojis",
+        "https://raw.githubusercontent.com/Ranks/emojione/v2.2.6/emoji.json",
         "https://slack.com/api/emoji.list?token={{SLACK_TOKEN}}" // {{SLACK_TOKEN}} will be replaced with actual token
     ],
     "kadira": { // kadira.io monitoring, optional

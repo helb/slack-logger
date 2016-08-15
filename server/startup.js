@@ -16,6 +16,17 @@ var dispatchEvent = function(message) {
     Meteor.call("addMessage", messageDocument);
 };
 
+var insertEmoji = function(id, url) {
+    if (/^http/.test(url)) {
+        Emojis.upsert(id, {
+            $set: {
+                "_id": id,
+                "url": url
+            }
+        });
+    }
+}
+
 Meteor.startup(function() {
     if (!Meteor.settings.offlineMode) {
         var httpOptions = {
@@ -58,31 +69,40 @@ Meteor.startup(function() {
         Emojis.remove({});
         Meteor.settings.emojiURLs.forEach(
             function(url) {
+                var parseEmojiOne = false;
                 var urlWithToken = url.replace("{{SLACK_TOKEN}}", Meteor.settings.slackToken);
-                var emojiJson = HTTP.get(urlWithToken, httpOptions).data;
-                var emojiList = {};
-                if (typeof emojiJson.emoji !== "undefined") { // Slack
-                    emojiList = Object.keys(emojiJson.emoji);
-                    emojiJson = emojiJson.emoji;
-                } else { // Github
-                    emojiList = Object.keys(emojiJson);
-                }
-                emojiList.forEach(
-                    function(emoji) {
-                        var emojiUrl = emojiJson[emoji];
-                        if (/^alias:.*/.test(emojiUrl)) {
-                            var aliasTarget = emojiUrl.replace(/^alias:/, "");
-                            emojiUrl = emojiJson[aliasTarget];
-                        }
-                        if (/^http/.test(emojiUrl)) {
-                            Emojis.upsert(emoji, {
-                                $set: {
-                                    "_id": emoji,
-                                    "url": emojiUrl
+                HTTP.get(urlWithToken, httpOptions, function(error, response) {
+                    if (response) {
+                        var emojiJson = JSON.parse(response.content);
+                        if (typeof emojiJson.emoji !== "undefined") { // Slack
+                            emojiList = Object.keys(emojiJson.emoji);
+                            emojiJson = emojiJson.emoji;
+                            emojiList.forEach(
+                                function(emoji) {
+                                    var emojiUrl = emojiJson[emoji];
+                                    if (/^alias:.*/.test(emojiUrl)) {
+                                        var aliasTarget = emojiUrl.replace(/^alias:/, "");
+                                        emojiUrl = emojiJson[aliasTarget];
+                                    }
+                                    insertEmoji(emoji, emojiUrl);
                                 }
-                            });
+                            );
+                        } else { // emojiOne
+                            emojiList = Object.keys(emojiJson);
+                            emojiList.forEach(
+                                function(emoji) {
+                                    var emojiUrl = "https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.6/assets/png/" + emojiJson[emoji].unicode + ".png";
+                                    insertEmoji(emoji, emojiUrl);
+                                    if (emojiJson[emoji].aliases.length > 0) {
+                                        emojiJson[emoji].aliases.forEach(function(alias) {
+                                            insertEmoji(alias.replace(/^:/, "").replace(/:$/, ""), emojiUrl);
+                                        })
+                                    }
+                                }
+                            );
                         }
-                    });
+                    }
+                });
             });
 
         if (Meteor.settings.loadHistory) {
